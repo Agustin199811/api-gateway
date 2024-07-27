@@ -22,7 +22,7 @@ jobs:
 
       - name: Build and push api-gateway
         run: |
-          docker build ./api-gateway -t ${{ secrets.DOCKER_HUB_USERNAME }}/api-gateway:latest
+          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/api-gateway:latest
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/api-gateway:latest
 
   deploy:
@@ -56,14 +56,11 @@ jobs:
             fi
            
             sudo docker stop $(sudo docker ps -q) || true
-            sudo docker rm $(sudo docker ps -aq) || true  
-            
+            sudo docker rm $(sudo docker ps -aq) || true         
 
             sudo docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/api-gateway:latest        
            
             sudo docker run -d --name api-gateway -p 8080:8080 ${{ secrets.DOCKER_HUB_USERNAME }}/api-gateway:latest
-           
-
-           
+ 
             sudo docker image prune -af
           comment: Pulls the latest images from Docker Hub and runs them on the instance in a custom network.
