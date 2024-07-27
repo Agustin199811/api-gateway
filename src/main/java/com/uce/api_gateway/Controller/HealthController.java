@@ -13,5 +13,6 @@ public class HealthController {
     @GetMapping
     public ResponseEntity<String> checkHealth() {
         return ResponseEntity.ok("Service is up and running");
+        
     }
 }
