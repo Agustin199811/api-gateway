@@ -22,7 +22,7 @@ jobs:
 
       - name: Build and push api-gateway
         run: |
-          docker build /api-gateway -t ${{ secrets.DOCKER_HUB_USERNAME }}/api-gateway:latest
+          docker build ./api-gateway -t ${{ secrets.DOCKER_HUB_USERNAME }}/api-gateway:latest
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/api-gateway:latest
 
   deploy:
