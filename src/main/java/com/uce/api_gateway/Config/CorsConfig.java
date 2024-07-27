@@ -19,7 +19,6 @@ public class CorsConfig {
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(new PathPatternParser());
         source.registerCorsConfiguration("/**", corsConfig);
-
         return new CorsWebFilter(source);
     }
 }
