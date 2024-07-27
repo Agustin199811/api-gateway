@@ -1,0 +1,58 @@
+name: Deploy Api-gateway Service on ECR
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create-docker-image:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+    - name: Create ECR Repository if Not Exists
+      run: |
+        REPO_NAME="api-gateway"
+        if ! aws ecr describe-repositories --repository-names $REPO_NAME --region us-east-1 > /dev/null 2>&1; then
+          echo "Repository $REPO_NAME does not exist. Creating..."
+          aws ecr create-repository --repository-name $REPO_NAME --region us-east-1
+        else
+          echo "Repository $REPO_NAME already exists."
+        fi
+
+    - name: Log to AWS ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Build, Tag, and Push Docker Image
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: api-gateway
+        IMAGE_TAG: latest
+      run: |
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+  deploy:
+    name: Send image docker to AWS ECS
+    runs-on: ubuntu-latest
+    needs: create-docker-image
+    steps:
+      - name: Config login de AWS
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+ 
+      - name: Update version to ECS
+        run: |
+          aws ecs update-service --cluster clot-ecommerce --service api-gateway  --task-definition api-gateway-task --force-new-deployment
