@@ -46,7 +46,7 @@ The API Gateway can aggregate responses from multiple microservices. For example
 
 Implement rate limiting and throttling policies to protect your e-commerce platform from excessive traffic. This helps manage traffic during peak shopping times and ensures fair usage across clients.
 
-### 5. Caching
+### 6. Caching
 
 Improve performance by caching frequently accessed data, such as product details and promotional offers. Cached responses reduce the load on backend services and improve response times for users.
 
