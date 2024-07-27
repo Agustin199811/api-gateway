@@ -24,12 +24,13 @@ jobs:
         run: |
           docker build ./ -f Dockerfile -t ${{ secrets.DOCKER_HUB_USERNAME }}/api-gateway:latest
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/api-gateway:latest
-          
+
   deploy:
     name: Deploy to AWS EC2
     runs-on: ubuntu-latest
     needs: build-and-push
     if: ${{ needs.build-and-push.result == 'success' }}
+    
 
     steps:
       - name: Checkout repository
