@@ -26,43 +26,43 @@ An API Gateway acts as a single entry point for managing and routing requests to
 
 ## Benefits of Using an API Gateway
 
-### Unified Entry Point
+### 1. Unified Entry Point
 
 An API Gateway consolidates multiple microservices into a single entry point, making it easier for clients to interact with your e-commerce platform. This simplifies API management and reduces the complexity of client interactions.
 
-### Routing and Load Balancing
+### 2. Routing and Load Balancing
 
 The API Gateway routes requests to the appropriate microservice based on predefined rules and handles load balancing to distribute traffic evenly. This ensures high availability and reliability, particularly during high-traffic periods.
 
-### Centralized Authentication and Authorization
+### 3. Centralized Authentication and Authorization
 
 Manage authentication and authorization centrally through the API Gateway. It can validate tokens and enforce security policies, ensuring only authenticated users access specific features, such as managing orders or viewing detailed product information.
 
-### API Composition
+### 4. API Composition
 
 The API Gateway can aggregate responses from multiple microservices. For example, a product detail page might need data from the product service, brand service, and inventory service. The Gateway combines these responses into a unified output for the client.
 
-### Rate Limiting and Throttling
+### 5. Rate Limiting and Throttling
 
 Implement rate limiting and throttling policies to protect your e-commerce platform from excessive traffic. This helps manage traffic during peak shopping times and ensures fair usage across clients.
 
-### Caching
+### 5. Caching
 
 Improve performance by caching frequently accessed data, such as product details and promotional offers. Cached responses reduce the load on backend services and improve response times for users.
 
-### Monitoring and Logging
+### 7. Monitoring and Logging
 
 The API Gateway provides centralized monitoring and logging capabilities. Track incoming requests, responses, and performance metrics to gain insights into system behavior, detect issues, and monitor user interactions.
 
-### Service Discovery Integration
+### 8. Service Discovery Integration
 
 When integrated with service discovery tools like Eureka, the API Gateway can dynamically route requests to available microservice instances. This ensures requests are directed to healthy and active services, enhancing system resilience.
 
-### Request and Response Transformation
+### 9. Request and Response Transformation
 
 Transform requests and responses as needed, such as modifying payloads or adjusting formats. This flexibility supports interoperability between different services and client applications.
 
-### Security Enhancements
+### 10. Security Enhancements
 
 Beyond authentication, the API Gateway can implement additional security measures such as SSL termination, IP whitelisting, and protection against DDoS attacks. This fortifies the security of your e-commerce platform.
 
@@ -70,7 +70,7 @@ Beyond authentication, the API Gateway can implement additional security measure
 
 In a Spring Boot e-commerce application, Spring Cloud Gateway is a popular choice for implementing an API Gateway. It offers powerful features for routing, filtering, and managing requests.
 
-### Basic Configuration
+### 1. Basic Configuration
 
 Here is a sample configuration for Spring Cloud Gateway in `application.properties`:
 
