@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-and-push
     if: ${{ needs.build-and-push.result == 'success' }}
-    
+
 
     steps:
       - name: Checkout repository
@@ -56,6 +56,7 @@ jobs:
               sudo usermod -aG docker $USER
             fi
            
+            
             sudo docker stop $(sudo docker ps -q) || true
             sudo docker rm $(sudo docker ps -aq) || true         
 
