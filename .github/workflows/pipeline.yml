@@ -24,6 +24,7 @@ jobs:
         run: |
           docker build ./ -f Dockerfile -t ${{ secrets.DOCKER_HUB_USERNAME }}/api-gateway:latest
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/api-gateway:latest
+          
   deploy:
     name: Deploy to AWS EC2
     runs-on: ubuntu-latest
